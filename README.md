@@ -1,75 +1,57 @@
-# Gesture File Transfer
+Huawei-style Gesture File Transfer - Prototype
+===============================================
 
-**Gesture-based file transfer with animations using Python and Mediapipe**
+What this is
+------------
+A prototype that demonstrates a Huawei-like "grab & drop" gesture file transfer:
+- Use your webcam to detect hand gestures (open palm / fist) with MediaPipe.
+- Make a fist to "grab" the sample image; open your palm to "drop" and send it to the receiver.
+- Includes a Pygame window that visually follows the grabbed image for the "wow" effect.
+- File transfer happens over TCP sockets to a receiver running server.py.
 
-This project allows you to send files using **hand gestures**, with smooth flying animations and particle effects to make the process visual and interactive. Built with Python, Mediapipe, and Pygame.
+This is a prototype for learning & experimentation, not a production implementation.
 
----
+Files
+-----
+- server.py       : Receiver. Run on the machine that will receive files.
+- client.py       : Sender. Run on the machine with the webcam.
+- gestures.py     : MediaPipe-based hand gesture detector.
+- ui.py           : Pygame visual animation for grab/drop.
+- sample.png      : Sample image to send.
+- requirements.txt: Python packages to install.
 
-## 🚀 Features
+Requirements
+------------
+- Python 3.8+
+- Install dependencies:
+    pip install -r requirements.txt
 
-- Detect hand gestures using **Mediapipe**.
-- Send files visually with **flying file animation**.
-- Particle trails and hand icons for a **polished UI**.
-- Lightweight, extendable, and easy to customize.
-- Supports multiple file types.
+How to run
+----------
+1) On the RECEIVER machine (where you want the file to be saved), run:
+    python server.py
 
----
+   This will listen on port 5001 and save incoming file as 'received_<originalname>'.
 
-## 📂 Project Structure
+2) On the SENDER machine (your webcam machine), edit client.py and set:
+    SERVER_IP = "<receiver_ip_address>"
 
-gesture_file_transfer/
-│
-├─ client.py # Main Python sender script
-├─ gestures.py # Mediapipe-based gesture detection
-├─ ui.py # Animation classes (file flying, particle trails)
-├─ assets/
-│ ├─ sample.png # Example file to send
-│ └─ icon.png # Hand/gesture icon for animation
-├─ requirements.txt # Python dependencies
-├─ README.md # Project README (this file)
-└─ LICENSE # MIT License file
+   Then run:
+    python client.py
 
+3) Use webcam window:
+   - Show an OPEN PALM to idle.
+   - Make a FIST to 'grab' the image (it will appear in the animation window and follow your hand).
+   - Show OPEN PALM again to 'drop' — the file will be sent to the receiver.
 
----
+Notes & Tips
+-------------
+- Ensure both machines are on the same local network.
+- If firewall blocks the port, allow Python / port 5001 for testing.
+- If MediaPipe fails to install on some platforms, check official docs.
 
-Navigate to the project folder:
+License
+-------
+MIT - for educational use.
 
-cd gesture_file_transfer
-
-Install dependencies:
-
-pip install -r requirements.txt
-
-Run the main script:
-
-python client.pyHow to Run
-
-
-MIT License
-
-Copyright (c) 2025 Vinayak Patil
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-📫 Contact
-
-Email: vinupatil1728@gmail.com
-
-LinkedIn: https://www.linkedin.com/in/vinayak-patil1/
+Enjoy! 🚀
